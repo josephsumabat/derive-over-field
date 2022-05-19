@@ -6,7 +6,6 @@ module DeriveOverField (
 ) where
 
 import Language.Haskell.TH
-import Data.Set as Set hiding (filter)
 import Data.Maybe
 import Control.Monad
 import qualified Data.Char as Char
@@ -91,9 +90,10 @@ deriveOverAllFields fnNameOption typeName = do
   where
     getVarBangName (n, _, _) = n
 
--- | Set the naming convention for generated functions useful if there are conflicts
+-- | Set the naming convention for generated functions. Useful if there are conflicts
 data DeriveOverFnNameOption
-  = -- | function name will be overField if field is a field of Mytype
+  = 
     OverField
-  | -- | function name will be overMymoduleField if field is a field of the type Mytype
-    OverModuleField
+    -- ^ function name will be overField if field is a field of Mytype
+  | OverModuleField
+    -- ^ function name will be overMymoduleField if field is a field of the type Mytype
