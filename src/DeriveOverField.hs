@@ -50,8 +50,8 @@ deriveOverField = deriveOverFieldWithOptions OverField
 -- | deriveOverField with configurable function names 
 deriveOverFieldWithOptions :: DeriveOverFnNameOption -> Name  -> Q [Dec]
 deriveOverFieldWithOptions fnNameOption fieldName= do
-  let myType = mkName "parentType"
-      modifyFieldFn = mkName "modifyFieldFn"
+  myType <- newName "parentType"
+  modifyFieldFn <- newName "modifyFieldFn"
   fieldType <- reifyType fieldName
   case fieldType of
     AppT (AppT ArrowT parentType) childType ->
