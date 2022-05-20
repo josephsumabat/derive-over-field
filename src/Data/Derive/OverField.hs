@@ -1,5 +1,5 @@
 {-# LANGUAGE NamedFieldPuns #-}
-module DeriveOverField (
+module Data.Derive.OverField (
   deriveOverField
  , deriveOverFieldWithOptions
  , deriveOverAllFields
@@ -67,7 +67,7 @@ deriveOverFieldWithOptions fnNameOption fieldName= do
             FunD overName [Clause [VarP modifyFieldFn, VarP myType] (NormalB (RecUpdE (VarE myType) [(fieldName, AppE (VarE modifyFieldFn) (ParensE (AppE (VarE fieldName) (VarE myType))))])) []]
        in do
          pure [typeSig, functionDefinition]
-    _ -> error "Only simple constructors supported"
+    _ -> reportWarning "Only simple constructors supported" >> pure []
   where
     upperFirst :: String -> String
     upperFirst [] = []

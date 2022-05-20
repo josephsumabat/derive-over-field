@@ -22,7 +22,7 @@ maintainer:         joseph@mercury.com
 extra-source-files: CHANGELOG.md
 
 library
-    exposed-modules: DeriveOverField
+    exposed-modules: Data.Derive.OverField
 
     -- Modules included in this library but not exported.
     -- other-modules:
