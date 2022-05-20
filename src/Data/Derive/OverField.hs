@@ -47,7 +47,7 @@ import qualified Data.Char as Char
 deriveOverField :: Name -> Q [Dec]
 deriveOverField = deriveOverFieldWithOptions OverField
 
--- | deriveOverField with configurable function names 
+-- | deriveOverField with configurable function names. See: `DeriveOverFnNameOption`
 deriveOverFieldWithOptions :: DeriveOverFnNameOption -> Name  -> Q [Dec]
 deriveOverFieldWithOptions fnNameOption fieldName= do
   myType <- newName "parentType"
@@ -86,7 +86,7 @@ deriveOverAllFields fnNameOption typeName = do
     TyConI (DataD _ _ _ _ [RecC _ rawVarbangs] _) ->
       let fieldNames = (getVarBangName <$> rawVarbangs)
        in join <$> mapM (deriveOverFieldWithOptions fnNameOption) fieldNames
-    _ -> reportError "Invalid type input to deriveOverAllFields: input must be a data type constructor." >> pure []
+    _ -> fail "Invalid type input to deriveOverAllFields: input must be a data type constructor."
   where
     getVarBangName (n, _, _) = n
 
