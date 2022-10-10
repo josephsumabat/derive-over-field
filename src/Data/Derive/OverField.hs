@@ -1,8 +1,8 @@
-{-# LANGUAGE NamedFieldPuns #-}
 module Data.Derive.OverField (
   deriveOverField
  , deriveOverFieldWithOptions
  , deriveOverAllFields
+ , DeriveOverFnNameOption (..)
 ) where
 
 import Language.Haskell.TH
